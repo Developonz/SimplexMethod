@@ -1,7 +1,5 @@
 import java.io.*;
 import java.util.Scanner;
-import java.util.Formatter;
-
 public class Main {
     static int countCoef;
     static int countLimit;
@@ -10,9 +8,12 @@ public class Main {
     static int countRow;
     static int countCol;
     static int[] mins;
-
+    static double answer;
     public static void main(String[] args) {
         inpMatrixManual();
+        solveTask();
+    }
+    private static void solveTask() {
         int i = 1;
         while (!indexStrCalc()) {
             System.out.println("\nИтерация " + i++);
@@ -207,7 +208,16 @@ public class Main {
         countCoef = scanner.nextInt();
         System.out.print("Введите количество ограничений: ");
         countLimit = scanner.nextInt();
-        System.out.print("Функция стремится к min(false) или к max(true)?: ");
-        desire = scanner.nextBoolean();
+        System.out.print("Функция стремится к min или к max?: ");
+        String str;
+        do {
+            str = scanner.nextLine();
+        } while (!str.equals("max") && !str.equals("min"));
+        if (str.equals("max")) {
+            desire = true;
+        }
+        else {
+            desire = false;
+        }
     }
 }
