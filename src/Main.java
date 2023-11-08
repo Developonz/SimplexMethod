@@ -158,7 +158,12 @@ public class Main {
             System.out.printf("%" + 13 + "." + 3 + "f", matrix[0][i]);
         }
         System.out.printf("%" + 13 + "s", "Тета\n");
-        System.out.printf("%" + 26 + "s", "By");
+        if (desire) {
+            System.out.printf("%" + 26 + "s", "Bx");
+        }
+        else {
+            System.out.printf("%" + 26 + "s", "By");
+        }
         for (int i = 0; i < countCol - 3; ++i) {
             System.out.printf("%" + 12 + "s", "A");
             System.out.print(i);
@@ -204,20 +209,32 @@ public class Main {
     }
     private static void inpData() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите количество коэффициентов целевой функции: ");
-        countCoef = scanner.nextInt();
-        System.out.print("Введите количество ограничений: ");
-        countLimit = scanner.nextInt();
-        System.out.print("Функция стремится к min или к max?: ");
-        String str;
-        do {
-            str = scanner.nextLine();
-        } while (!str.equals("max") && !str.equals("min"));
-        if (str.equals("max")) {
-            desire = true;
+        boolean check = true;
+        while (check) {
+            System.out.print("Введите количество коэффициентов целевой функции: ");
+            countCoef = scanner.nextInt();
+            System.out.print("Введите количество ограничений: ");
+            countLimit = scanner.nextInt();
+            if (countCoef < 1 || countLimit < 1) {
+                System.out.println("Количество ограничений и коэффициентов целевой функции не должно быть меньше единицы");
+                continue;
+            }
+            else {
+                check = false;
+            }
+            System.out.print("Функция стремится к min или к max?: ");
+            String str;
+            do {
+                str = scanner.nextLine();
+            } while (!str.equals("max") && !str.equals("min"));
+            if (str.equals("max")) {
+                desire = true;
+            }
+            else {
+                desire = false;
+            }
         }
-        else {
-            desire = false;
-        }
+
+
     }
 }
